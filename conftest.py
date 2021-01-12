@@ -3,11 +3,7 @@ import time
 import json
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import Select
-from selenium.webdriver.support.wait import WebDriverWait
+
 
 @pytest.fixture(scope='session')
 def config():
@@ -15,7 +11,7 @@ def config():
         data = json.load(config_file)
     return data
 
-@pytest.fixture(scope='session')
+
 @pytest.fixture
 def driver(config):
     if config['browser'] == 'chrome':
@@ -24,14 +20,26 @@ def driver(config):
         driver = webdriver.Firefox()
     else:
         raise Exception(f'{config["browser"]} is not a supported browser')
-    login_lk(driver, config)
+    # login_lk(driver, config)
     yield driver
     driver.quit()
 
 
 def login_lk(driver, config):
-    driver.get("link")
-    # driver.set_window_size(1500, 1200)
-    driver.implicitly_wait(10)
+    try:
+        driver.get(f"{config['link']}")
+        # driver.set_window_size(1500, 1200)
+        driver.implicitly_wait(10)
 
-    driver.find_element(By.ID)
+        logininput = driver.find_element(By.CSS_SELECTOR, "#authorization_form .form-group:nth-child(2) .form-control")
+        logininput.send_keys(f"{config['login_auth']}")
+
+        passinput = driver.find_element(By.CSS_SELECTOR, "#authorization_form .form-group:nth-child(3) .form-control")
+        passinput.send_keys(f"{config['pass_auth']}")
+
+        button = driver.find_element(By.CSS_SELECTOR, "#authorization_form .btn")
+        button.click()
+
+    except Exception:
+        print("\nошибка")
+        driver.close()

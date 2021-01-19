@@ -1,11 +1,17 @@
 {
+  "account":
+    {
+      "base_code": "60",
+      "region": "Псков",
+      "fio": "ига",
+      "ls": "805107"
+    },
   "link": "https://lk-mrg.dev.stack-it.ru",
-  "browser": "chrome",
+  "browser": "edge",
   "login_auth": "web@stack-it.ru",
   "pass_auth": "!23QweAsdZxc",
   "login_reg": "3@com",
   "password_reg": "123456QWer",
   "invalid_pass": "12345678",
-  "fio": "ига",
-  "ls": "805107"
+  "path_to_download": "C:\\Users\\Shishkova_VA\\Downloads"
 }

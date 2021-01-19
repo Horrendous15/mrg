@@ -1,0 +1,44 @@
+import pytest
+import time
+import allure
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.common.exceptions import NoSuchElementException
+
+
+# проверка существования элемента
+def check_exists_by_xpath(xpath, driver):
+    try:
+        block_sch = driver.find_element(By.CSS_SELECTOR, xpath)
+    except NoSuchElementException:
+        return False
+    return True
+
+
+# Меню - Главная
+class TestMenuMain():
+    # Переход на страницу оплаты при нажатии на сумму оплаты в navbar
+    def test_sum_pay(self, config, driver, login_lk):
+        sum_pay = driver.find_element(By.CSS_SELECTOR, ".widget-section3 a")
+        sum_pay.click()
+
+        assert str(driver.current_url) == \
+               f"{config['link']}/{config['account']['base_code']}/account/{config['account']['ls']}/payment"
+
+    # Переход на страницу Обращения
+    def test_appeals_button(self, config, driver, login_lk):
+        button = driver.find_element(By.CSS_SELECTOR, "._appeals_content .btn")
+        button.click()
+
+        url_appeals = driver.current_url
+
+        assert url_appeals == f"{config['link']}/" \
+                              f"{config['account']['base_code']}/account/{config['account']['ls']}/appeals"
+
+
+
+
+
+
+
+

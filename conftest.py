@@ -7,7 +7,7 @@ from selenium.webdriver.common.by import By
 
 @pytest.fixture(scope='session')
 def config():
-    with open('config.json') as config_file:
+    with open('config.json', encoding="utf-8") as config_file:
         data = json.load(config_file)
     return data
 
@@ -18,6 +18,8 @@ def driver(config):
         driver = webdriver.Chrome()
     elif config['browser'] == 'firefox':
         driver = webdriver.Firefox()
+    elif config['browser'] == 'edge':
+        driver = webdriver.Edge("C:\\Webdriver\\msedgedriver.exe")
     else:
         raise Exception(f'{config["browser"]} is not a supported browser')
     # login_lk(driver, config)
@@ -25,6 +27,7 @@ def driver(config):
     driver.quit()
 
 
+@pytest.fixture
 def login_lk(driver, config):
     try:
         driver.get(f"{config['link']}")
@@ -41,5 +44,5 @@ def login_lk(driver, config):
         button.click()
 
     except Exception:
-        print("\nошибка")
+        print("\nошибка аторизации")
         driver.close()

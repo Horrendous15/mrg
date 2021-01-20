@@ -10,10 +10,10 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.keys import Keys
 
 
-# проверка существования элемента
+# проверка существования элемента на странице
 def check_exists_by_xpath(xpath, driver):
     try:
-        block_sch = driver.find_element(By.CSS_SELECTOR, xpath)
+        block = driver.find_element(By.CSS_SELECTOR, xpath)
     except NoSuchElementException:
         return False
     return True
@@ -121,6 +121,46 @@ class TestMenuProfile():
             list_phone = [el.text for el in list_phone]
 
             assert not select_elem(list_phone, phone)
+
+        except TimeoutException:
+            assert check_exists_by_xpath(".col-12.widget-receipts-history", driver)
+
+    # подключение рассылки по почте
+    def test_receiving_email(self, config, driver, login_lk):
+        driver.get(f"{config['link']}/{config['account']['base_code']}/account/{config['account']['ls']}/profile")
+        try:
+            WebDriverWait(driver, 10).until(EC.visibility_of_all_elements_located((By.CSS_SELECTOR,
+                                                                                   ".widget-profile")))
+
+            subscription = driver.find_element(By.CSS_SELECTOR, "#archive-tab")
+            subscription.click()
+
+            email_text = driver.find_element(By.CSS_SELECTOR, "#emailCurrent").text
+            if email_text != "":
+
+                slider_email = driver.find_element(By.CSS_SELECTOR, "#subscribeEmailCheckbox+.round")
+                slider_email.click()
+                time.sleep(1)
+
+            slider_email = driver.find_element(By.CSS_SELECTOR, "#subscribeEmailCheckbox+.round")
+            slider_email.click()
+
+            checkbox_email = driver.find_element(By.CSS_SELECTOR, "#subscribeKvtEmailCustom")
+            checkbox_email.click()
+
+            input_email = driver.find_element(By.CSS_SELECTOR, "#subscribeKvtEmailNew")
+            input_email.send_keys("1@2")
+
+            button_save = driver.find_element(By.CSS_SELECTOR, "#subscribeEmailSave")
+            button_save.click()
+
+            time.sleep(1)
+            email_text = driver.find_element(By.CSS_SELECTOR, "#emailCurrent").text
+
+            assert email_text == "1@2"
+
+            slider_email = driver.find_element(By.CSS_SELECTOR, "#subscribeEmailCheckbox+.round")
+            slider_email.click()
 
         except TimeoutException:
             assert check_exists_by_xpath(".col-12.widget-receipts-history", driver)

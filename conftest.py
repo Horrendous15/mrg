@@ -17,12 +17,18 @@ def driver(config):
     if config['browser'] == 'chrome':
         driver = webdriver.Chrome()
     elif config['browser'] == 'firefox':
-        driver = webdriver.Firefox()
+
+        fp = webdriver.FirefoxProfile()
+        fp.set_preference("browser.download.folderList", 2)
+        fp.set_preference("browser.download.manager.showWhenStarting", False)
+        fp.set_preference("browser.helperApps.alwaysAsk.force", False)
+        fp.set_preference("browser.helperApps.neverAsk.saveToDisk", "application/pdf")
+        fp.set_preference("pdfjs.disabled", True)
+        driver = webdriver.Firefox(fp)
     elif config['browser'] == 'edge':
         driver = webdriver.Edge("C:\\Webdriver\\msedgedriver.exe")
     else:
         raise Exception(f'{config["browser"]} is not a supported browser')
-    # login_lk(driver, config)
     yield driver
     driver.quit()
 

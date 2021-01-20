@@ -38,6 +38,9 @@ class TestMenuCounters():
             WebDriverWait(driver, 10).until(EC.visibility_of_all_elements_located((By.CSS_SELECTOR, ".col-12.widget-big")))
 
             rate = driver.find_element(By.CSS_SELECTOR, ".block-note b:nth-child(4)").text
+
+            rate_float = round(float(rate) * 5, 2)
+
             last_indications = driver.find_element(By.CSS_SELECTOR,
                                                    "#counterHistoryTable .odd:nth-child(1) td:nth-child(3)").text
 
@@ -48,7 +51,7 @@ class TestMenuCounters():
             pay_sch = driver.find_element(By.CSS_SELECTOR, "._pay span").text
 
             assert (diff_indications == str(5)) & \
-                   (pay_sch == str(float(rate)*5)+" р.")
+                   (float(pay_sch.split()[0]) == rate_float)
 
         except TimeoutException:
             assert check_exists_by_xpath(".col-12.widget-big", driver)

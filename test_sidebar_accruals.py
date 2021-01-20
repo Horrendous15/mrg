@@ -54,7 +54,7 @@ class TestMenuAccruals():
                                                                                    ".col-12.widget-accruals")))
 
             list_elem = driver.find_elements(By.CSS_SELECTOR, f"#gazServicesTable tbody td:nth-child({number_column})")
-            list_sort_exp = [item.text for item in list_elem]
+            list_sort_exp = [item.text.replace(" ", "") for item in list_elem]
             list_sort_exp.sort(key=float)
 
             sort_click = driver.find_element(By.CSS_SELECTOR, f"#gazServicesTable thead th:nth-child({number_column})")
@@ -62,7 +62,7 @@ class TestMenuAccruals():
 
             actual_result = driver.find_elements(By.CSS_SELECTOR,
                                                  f"#gazServicesTable tbody td:nth-child({number_column})")
-            list_sort_actual = [el.text for el in actual_result]
+            list_sort_actual = [el.text.replace(" ", "") for el in actual_result]
 
             assert list_sort_exp == list_sort_actual
 
@@ -169,7 +169,7 @@ class TestMenuAccruals():
             sum_total = driver.find_element(By.CSS_SELECTOR, "#accrualsHistoryTable tfoot th:nth-child(3)").text
             sum_total = sum_total.replace(" ", "")
 
-            assert str(sum_float) == sum_total, allure.attach(f"expected: {str(sum_float)}"
+            assert sum_float == float(sum_total), allure.attach(f"expected: {str(sum_float)}"
                                                                    f"\nactual: {sum_total}")
 
         except TimeoutException:

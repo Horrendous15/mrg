@@ -6,11 +6,11 @@
       "fio": "ига",
       "ls": "805107"
     },
-  "link": "https://lk-mrg.dev.stack-it.ru",
-  "browser": "edge",
+  "link": "https://paygas.ru",
+  "browser": "chrome",
   "login_auth": "web@stack-it.ru",
   "pass_auth": "!23QweAsdZxc",
-  "login_reg": "3@com",
+  "login_reg": "4@com",
   "password_reg": "123456QWer",
   "invalid_pass": "12345678",
   "path_to_download": "C:\\Users\\Shishkova_VA\\Downloads"

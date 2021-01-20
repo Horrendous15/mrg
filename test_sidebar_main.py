@@ -19,6 +19,7 @@ def check_exists_by_xpath(xpath, driver):
 class TestMenuMain():
     # Переход на страницу оплаты при нажатии на сумму оплаты в navbar
     def test_sum_pay(self, config, driver, login_lk):
+        driver.get(f"{config['link']}/{config['account']['base_code']}/account/{config['account']['ls']}")
         sum_pay = driver.find_element(By.CSS_SELECTOR, ".widget-section3 a")
         sum_pay.click()
 
@@ -27,6 +28,7 @@ class TestMenuMain():
 
     # Переход на страницу Обращения
     def test_appeals_button(self, config, driver, login_lk):
+        driver.get(f"{config['link']}/{config['account']['base_code']}/account/{config['account']['ls']}")
         button = driver.find_element(By.CSS_SELECTOR, "._appeals_content .btn")
         button.click()
 

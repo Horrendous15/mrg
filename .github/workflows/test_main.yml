@@ -6,7 +6,11 @@ on:
     
 jobs:
   test:
-    runs-on: ubuntu-latest 
+    runs-on: ubuntu-latest
     steps:
-      - name: test_navbar
-        run: pytest test_navbar.py
+      - uses: actions/checkout@v1
+      - name: test_
+        run: |
+         python --version
+         selenium --version
+        

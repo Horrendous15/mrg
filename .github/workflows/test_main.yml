@@ -3,7 +3,10 @@ name: Test
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
-  schedule:
-    - cron: '0 0 1'
+    
+jobs:
+  test:
+    runs-on: ubuntu-latest 
+    steps:
+      - name: test_navbar
+        run: pytest test_navbar.py

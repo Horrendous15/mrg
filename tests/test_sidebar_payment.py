@@ -15,6 +15,7 @@ from selenium.webdriver.common.keys import Keys
 # проверка существования элемента
 def check_exists_by_xpath(xpath, driver):
     try:
+        WebDriverWait(driver, 5).until(EC.visibility_of_all_elements_located((By.CSS_SELECTOR, xpath)))
         block_sch = driver.find_element(By.CSS_SELECTOR, xpath)
     except NoSuchElementException:
         return False

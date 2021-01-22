@@ -1,14 +1,20 @@
-# This is a basic workflow to help you get started with Actions
-name: Test
+name: Test_mrg
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
 on:
-    
+  push:
+    branches: [ main ]
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - name: test_
-        run: |
-         python --version
-         selenium --version
+    - uses: actions/checkout@main
+    - uses: actions/setup-python@v1
+      with:
+        python-version: '3.8'
+
+    - run: python -m pip install --upgrade pip
+    - run: pip install -r requirements.txt
+    - run: pytest
+  
         

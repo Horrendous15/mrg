@@ -18,7 +18,6 @@ def driver(config):
         options = webdriver.ChromeOptions()
         options.add_argument('headless')
         driver = webdriver.Chrome(options=options)
-        driver = webdriver.Chrome()
     elif config['browser'] == 'firefox':
 
         fp = webdriver.FirefoxProfile()

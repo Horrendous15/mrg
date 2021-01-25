@@ -72,9 +72,6 @@ class TestMenuCounters():
             list_sort_exp = sorted(list_elem)
 
             sort_click = driver.find_element(By.CSS_SELECTOR, f"#counterHistoryTable th:nth-child({number_column})")
-            actions = ActionChains(driver)
-            actions.move_to_element(sort_click)
-            actions.perform()
             sort_click.click()
 
             actual_result = driver.find_elements(By.CSS_SELECTOR, f"#counterHistoryTable tbody td:nth-child({number_column})")
@@ -101,9 +98,6 @@ class TestMenuCounters():
             list_sort_exp.sort(key=lambda date: datetime.strptime(date, "%d.%m.%y"))
 
             sort_click = driver.find_element(By.CSS_SELECTOR, "#counterHistoryTable .sorting:nth-child(2)")
-            actions = ActionChains(driver)
-            actions.move_to_element(sort_click)
-            actions.perform()
 
             sort_click.click()
             actual_result = driver.find_elements(By.CSS_SELECTOR, "#counterHistoryTable tbody td:nth-child(2) span")
@@ -130,9 +124,6 @@ class TestMenuCounters():
             list_sort_exp.sort(key=int)
 
             sort_click = driver.find_element(By.CSS_SELECTOR, f"#counterHistoryTable .sorting:nth-child({number_column})")
-            actions = ActionChains(driver)
-            actions.move_to_element(sort_click)
-            actions.perform()
 
             sort_click.click()
             actual_result = driver.find_elements(By.CSS_SELECTOR, f"#counterHistoryTable tbody td:nth-child({number_column})")

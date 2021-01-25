@@ -9,6 +9,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.action_chains import ActionChains
 
 
 # проверка существования элемента
@@ -55,6 +56,7 @@ class TestMenuAccruals():
 
             list_elem = driver.find_elements(By.CSS_SELECTOR, f"#gazServicesTable tbody td:nth-child({number_column})")
             list_sort_exp = [item.text.replace(" ", "") for item in list_elem]
+
             list_sort_exp.sort(key=float)
 
             sort_click = driver.find_element(By.CSS_SELECTOR, f"#gazServicesTable thead th:nth-child({number_column})")

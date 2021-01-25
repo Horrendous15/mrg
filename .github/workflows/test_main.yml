@@ -8,7 +8,7 @@ on:
     - cron: "0 7 * * *"
 
 jobs:
-  test:
+  test1:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@main
@@ -20,13 +20,21 @@ jobs:
     - run: pip install -r requirements.txt
     - run: pytest tests/test_add_ls.py
     - run: pytest tests/test_navbar.py
-    - run: pytest tests/test_settings.py
-    - run: pytest tests/test_sidebar_accruals.py
-    - run: pytest tests/test_sidebar_appeals.py
-    - run: pytest tests/test_sidebar_counters.py
-    - run: pytest tests/test_sidebar_main.py
-    - run: pytest tests/test_sidebar_payment.py
-    - run: pytest tests/test_sidebar_receipts.py
-    - run: pytest tests/test_welcome.py
+      
+  test2:
+    runs-on: ubuntu-latest
+    steps:
+    - run: pytest tests/test_navbar.py
+  
+
+
+#     - run: pytest tests/test_settings.py
+#     - run: pytest tests/test_sidebar_accruals.py
+#     - run: pytest tests/test_sidebar_appeals.py
+#     - run: pytest tests/test_sidebar_counters.py
+#     - run: pytest tests/test_sidebar_main.py
+#     - run: pytest tests/test_sidebar_payment.py
+#     - run: pytest tests/test_sidebar_receipts.py
+#     - run: pytest tests/test_welcome.py
   
         

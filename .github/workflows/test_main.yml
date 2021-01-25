@@ -8,7 +8,7 @@ on:
     - cron: "0 7 * * *"
 
 jobs:
-  test1:
+  add_ls:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@main
@@ -19,17 +19,43 @@ jobs:
     - run: python -m pip install --upgrade pip
     - run: pip install -r requirements.txt
     - run: pytest tests/test_add_ls.py
-    - run: pytest tests/test_navbar.py
       
-  test2:
+  navbar:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@main
+    - uses: actions/setup-python@v1
+      with:
+        python-version: '3.8'
+
+    - run: python -m pip install --upgrade pip
+    - run: pip install -r requirements.txt
     - run: pytest tests/test_navbar.py
   
+  settings:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@main
+    - uses: actions/setup-python@v1
+      with:
+        python-version: '3.8'
 
+    - run: python -m pip install --upgrade pip
+    - run: pip install -r requirements.txt
+    - run: pytest tests/test_settings.py
+  
+  accruals:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@main
+    - uses: actions/setup-python@v1
+      with:
+        python-version: '3.8'
 
-#     - run: pytest tests/test_settings.py
-#     - run: pytest tests/test_sidebar_accruals.py
+    - run: python -m pip install --upgrade pip
+    - run: pip install -r requirements.txt
+    - run: pytest tests/test_sidebar_accruals.py
+
 #     - run: pytest tests/test_sidebar_appeals.py
 #     - run: pytest tests/test_sidebar_counters.py
 #     - run: pytest tests/test_sidebar_main.py

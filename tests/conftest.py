@@ -9,7 +9,7 @@ from selenium.webdriver.common.by import By
 
 @pytest.fixture(scope='session')
 def config():
-    with open('tests/config.json', encoding="utf-8") as config_file:
+    with open('config.json', encoding="utf-8") as config_file:
         data = json.load(config_file)
     return data
 
@@ -18,8 +18,14 @@ def config():
 def driver(config):
     if config["browser"] == 'chrome':
         options = webdriver.ChromeOptions()
+        options.add_experimental_option("prefs", {
+            'download.default_directory': config["path_to_download"],
+            'download.prompt_for_download': False,
+            'download.directory_upgrade': True,
+  })
         options.add_argument('headless')
         driver = webdriver.Chrome(options=options)
+
         # driver = webdriver.Chrome()
     else:
         raise Exception(f'{config["browser"]} is not a supported browser')

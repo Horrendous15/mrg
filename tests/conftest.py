@@ -9,7 +9,7 @@ from selenium.webdriver.common.by import By
 
 @pytest.fixture(scope='session')
 def config():
-    with open('config.json', encoding="utf-8") as config_file:
+    with open('tests/config.json', encoding="utf-8") as config_file:
         data = json.load(config_file)
     return data
 

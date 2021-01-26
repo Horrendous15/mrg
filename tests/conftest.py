@@ -37,7 +37,7 @@ def driver(config):
 def login_lk(driver, config):
     try:
         driver.get(f"{config['link']}")
-        driver.maximize_window()
+        driver.set_window_size(1500, 1500)
         driver.implicitly_wait(10)
 
         logininput = driver.find_element(By.CSS_SELECTOR, "#authorization_form .form-group:nth-child(2) .form-control")

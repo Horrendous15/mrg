@@ -157,21 +157,23 @@ class TestMenuAccruals():
             history = driver.find_element(By.CSS_SELECTOR, "#archive-tab")
             history.click()
 
+            time.sleep(1)
+
             sum_accrued = driver.find_elements(By.CSS_SELECTOR,
-                                               "#accrualsHistoryTable tbody tr td:nth-child(3)")
+                                               f"#accrualsHistoryTable tbody tr td:nth-child({number_column})")
 
             sum_list_float = [item.text for item in sum_accrued]
             list_exp = [float(item.replace(" ", "")) for item in sum_list_float]
             sum_float = sum(list_exp)
             sum_float = round(sum_float, 2)
 
-            sort_column = driver.find_element(By.CSS_SELECTOR, "#accrualsHistoryTable thead th:nth-child(3)")
+            sort_column = driver.find_element(By.CSS_SELECTOR, f"#accrualsHistoryTable thead th:nth-child({number_column})")
             sort_column.click()
 
-            sum_total = driver.find_element(By.CSS_SELECTOR, "#accrualsHistoryTable tfoot th:nth-child(3)").text
+            sum_total = driver.find_element(By.CSS_SELECTOR, f"#accrualsHistoryTable tfoot th:nth-child({number_column})").text
             sum_total = sum_total.replace(" ", "")
 
-            assert sum_float == float(sum_total), allure.attach(f"expected: {str(sum_float)}"
+            assert float(sum_total) == sum_float, allure.attach(f"expected: {str(sum_float)}"
                                                                    f"\nactual: {sum_total}")
 
         except TimeoutException:
@@ -208,8 +210,6 @@ class TestMenuAccruals():
             input_date_to.send_keys(Keys.BACKSPACE * 10)
             input_date_to.send_keys(to_d)
             driver.find_element(By.CSS_SELECTOR, ".active.day").click()
-                   
-            time.sleep(2)
 
             list_dates_actual = driver.find_elements(By.CSS_SELECTOR, "#paymentsHistoryTable td span")
             list_dates_actual = [el.text for el in list_dates_actual]

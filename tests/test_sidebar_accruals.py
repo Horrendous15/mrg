@@ -177,31 +177,6 @@ class TestMenuAccruals():
         except TimeoutException:
             assert check_exists_by_xpath(".col-12.widget-accruals", driver)
 
-    # # История начислений: Проверка значений ИТОГО (Исходящее сальдо)
-    # def test_total_out(self, config, driver, login_lk):
-    #     driver.get(f"{config['link']}/{config['account']['base_code']}/account/{config['account']['ls']}/accruals")
-    #     try:
-    #         WebDriverWait(driver, 10).until(EC.visibility_of_all_elements_located((By.CSS_SELECTOR,
-    #                                                                                ".col-12.widget-accruals")))
-    #         history = driver.find_element(By.CSS_SELECTOR, "#archive-tab")
-    #         history.click()
-    #
-    #         sum_out = driver.find_elements(By.CSS_SELECTOR,
-    #                                        "#accrualsHistoryTable tbody tr td:nth-child(6)")
-    #         sum_out = sum_out[-1].text.replace(" ", "")
-    #
-    #         in_balance = driver.find_element(By.CSS_SELECTOR, "#accrualsHistoryTable thead th:nth-child(6)")
-    #         in_balance.click()
-    #
-    #         sum_total_out = driver.find_element(By.CSS_SELECTOR, "#accrualsHistoryTable tfoot th:nth-child(6)").text
-    #         sum_total_out = sum_total_out.replace(" ", "")
-    #
-    #         assert sum_out == sum_total_out, allure.attach(f"expected: {sum_out}"
-    #                                                        f"\nactual: {sum_total_out}")
-    #
-    #     except TimeoutException:
-    #         assert check_exists_by_xpath(".col-12.widget-accruals", driver)
-
     # История платежей: вывод данных за указанный период
     def test_payment_history(self,  config, driver, login_lk):
         driver.get(f"{config['link']}/{config['account']['base_code']}/account/{config['account']['ls']}/accruals")
@@ -233,6 +208,8 @@ class TestMenuAccruals():
             input_date_to.send_keys(Keys.BACKSPACE * 10)
             input_date_to.send_keys(to_d)
             driver.find_element(By.CSS_SELECTOR, ".active.day").click()
+                   
+            time.sleep(2)
 
             list_dates_actual = driver.find_elements(By.CSS_SELECTOR, "#paymentsHistoryTable td span")
             list_dates_actual = [el.text for el in list_dates_actual]

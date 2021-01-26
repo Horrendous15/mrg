@@ -92,6 +92,8 @@ class TestMenuReceipts():
 
             show_details = driver.find_element(By.CSS_SELECTOR, ".showDetalizationModal")
             show_details.click()
+            
+            time.sleep(2)
 
             list_elem = driver.find_elements(By.CSS_SELECTOR,
                                              f"#accrualsDetalizationTable tbody td:nth-child({number_column})")

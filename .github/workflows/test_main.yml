@@ -17,14 +17,12 @@ jobs:
         python-version: '3.8'
     - run: python -m pip install --upgrade pip
     - run: pip install -r requirements.txt
-    - run: pytest tests/test_sidebar_receipts.py --alluredir results
+    - run: pytest tests/test_sidebar_receipts.py --alluredir tests/results
       
     - name: Upload pytest test results
       uses: actions/upload-artifact@v1
       with:
-        path: |
-              tests/results
-              tests/report.pdf
+        path: tests/results
       # Use always() to always run this step to publish test results when there are test failures
       if: ${{ always() }}
       

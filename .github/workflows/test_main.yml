@@ -19,7 +19,7 @@ jobs:
     - run: pip install -r requirements.txt
     - run: pytest tests/test_sidebar_receipts.py
     
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v1
       with:
         path: tests/downloads/
       # Use always() to always run this step to publish test results when there are test failures

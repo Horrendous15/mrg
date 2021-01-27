@@ -21,7 +21,10 @@ jobs:
     
     - uses: actions/upload-artifact@v1
       with:
-        path: tests/downloads/
+        path: junit/test-results-${{ matrix.python-version }}.xml
+    - uses: actions/upload-artifact@v1
+      with:  
+        path: tests/report.pdf
       # Use always() to always run this step to publish test results when there are test failures
       if: ${{ always() }}
       

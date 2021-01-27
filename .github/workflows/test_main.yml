@@ -22,10 +22,10 @@ jobs:
     - name: my artifact
       uses: actions/download-artifact@v2
       with:
-        path: tests/results
+        path: tests
     - name: Display structure of downloaded files
       run: ls -R
-      working-directory: tests/results
+      working-directory: tests
       # Use always() to always run this step to publish test results when there are test failures
       if: ${{ always() }}
       

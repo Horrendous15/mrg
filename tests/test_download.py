@@ -2,7 +2,7 @@ import pytest
 import time
 from datetime import datetime
 import json
-import os.path
+import os
 import glob
 import allure
 from selenium import webdriver
@@ -27,10 +27,10 @@ def check_exists_by_xpath(xpath, driver):
 # чтение файла
 def read_file(path):
     try:
-        list_dir = glob.glob(path)
-        for f in list_dir:
-            fl = open(f)
-            fl.close()
+        for f in os.listdir(path):
+            if f.endswith(".pdf"):
+                fl = open(f)
+                fl.close()
     except FileNotFoundError:
         return False
     return True
@@ -38,9 +38,9 @@ def read_file(path):
 
 # удаление файлов
 def remove_folder(path):
-    list_dir = glob.glob(path)
-    for f in list_dir:
-        os.remove(f)
+    for f in os.listdir(path):
+        if f.endswith(".pdf"):
+            os.remove(f)
 
 
 class TestReceipts():
@@ -51,7 +51,7 @@ class TestReceipts():
         try:
             WebDriverWait(driver, 5).until(EC.visibility_of_all_elements_located((By.CSS_SELECTOR,
                                                                                   ".col-12.widget-receipts-history")))
-            remove_folder(f"{config['path_to_download']}\\*.pdf")
+            remove_folder(f"{config['path_to_download']}/*.pdf")
 
             download_click = driver.find_element(By.CSS_SELECTOR, "tr:nth-child(1) .getReceipt")
 
@@ -66,7 +66,7 @@ class TestReceipts():
         try:
             WebDriverWait(driver, 10).until(EC.visibility_of_all_elements_located((By.CSS_SELECTOR,
                                                                                    ".col-12.widget-receipts-history")))
-            remove_folder(f"{config['path_to_download']}\\*.pdf")
+            remove_folder(f"{config['path_to_download']}/*.pdf")
 
             download_click = driver.find_element(By.CSS_SELECTOR, "tr:nth-child(1) .getReceipt")
             download_click.click()

@@ -39,7 +39,7 @@ jobs:
     - run: python -m pip install --upgrade pip
     - run: pip install -r requirements.txt
     
-    - run: pytest tests/test_sidebar_receipts.py
+    - run: pytest
     
     - name: my artifact
       uses: actions/download-artifact@v2

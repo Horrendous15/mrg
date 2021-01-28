@@ -211,6 +211,8 @@ class TestMenuAccruals():
             input_date_to.send_keys(Keys.BACKSPACE * 10)
             input_date_to.send_keys(to_d)
             driver.find_element(By.CSS_SELECTOR, ".active.day").click()
+                   
+            time.sleep(1)
 
             list_dates_actual = driver.find_elements(By.CSS_SELECTOR, "#paymentsHistoryTable td span")
             list_dates_actual = [el.text for el in list_dates_actual]

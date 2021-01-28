@@ -46,8 +46,8 @@ def remove_folder(path):
 class TestReceipts():
     # скачивание квитанции (существование файла в папке загрузок)
     def test_download_file(self, config):
-        assert glob.glob(f"{config['path_to_download']}\\*.pdf")
+        assert glob.glob(f"{config['path_to_download']}/*.pdf")
 
     # является ли файл доступным и читаемым
     def test_read_file(self, config):
-        assert read_file(f"{config['path_to_download']}\\*.pdf")
+        assert read_file(f"{config['path_to_download']}/*.pdf")

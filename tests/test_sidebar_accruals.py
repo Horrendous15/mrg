@@ -169,6 +169,7 @@ class TestMenuAccruals():
 
             sort_column = driver.find_element(By.CSS_SELECTOR, f"#accrualsHistoryTable thead th:nth-child({number_column})")
             sort_column.click()
+            time.sleep(1)
 
             sum_total = driver.find_element(By.CSS_SELECTOR, f"#accrualsHistoryTable tfoot th:nth-child({number_column})").text
             sum_total = sum_total.replace(" ", "")

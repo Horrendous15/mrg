@@ -27,10 +27,10 @@ def check_exists_by_xpath(xpath, driver):
 # чтение файла
 def read_file(path):
     try:
-        list_dir = glob.glob(path)
-        for f in list_dir:
-            fl = open(f)
-            fl.close()
+        for f in os.listdir(path):
+            if f.endswith(".pdf"):
+                fl = open(f)
+                fl.close()
     except FileNotFoundError:
         return False
     return True
@@ -38,9 +38,17 @@ def read_file(path):
 
 # удаление файлов
 def remove_folder(path):
-    list_dir = glob.glob(path)
-    for f in list_dir:
-        os.remove(f)
+    for f in os.listdir(path):
+        if f.endswith(".pdf"):
+            os.remove(f)
+
+
+def file_in_dir(path):
+    for f in os.listdir(path):
+        if f.endswith(".pdf"):
+            os.path.join(path, f)
+            return True
+        return False
 
 
 # квитанции
@@ -92,7 +100,7 @@ class TestMenuReceipts():
 
             show_details = driver.find_element(By.CSS_SELECTOR, ".showDetalizationModal")
             show_details.click()
-            
+
             time.sleep(2)
 
             list_elem = driver.find_elements(By.CSS_SELECTOR,
@@ -140,4 +148,40 @@ class TestMenuReceipts():
 
         except TimeoutException:
             assert check_exists_by_xpath(".col-12.widget-receipts-history", driver)
+
+    # скачивание квитанции (существование файла в папке загрузок)
+    def test_download_file(self, config, driver, login_lk):
+        driver.get(f"{config['link']}/{config['account']['base_code']}/account/{config['account']['ls']}/receipts")
+
+        try:
+            WebDriverWait(driver, 5).until(EC.visibility_of_all_elements_located((By.CSS_SELECTOR,
+                                                                                  ".col-12.widget-receipts-history")))
+            remove_folder(f"{config['path_to_download']}")
+
+            download_click = driver.find_element(By.CSS_SELECTOR, "tr:nth-child(1) .getReceipt")
+
+            download_click.click()
+            time.sleep(2)
+
+            assert file_in_dir(f"{config['path_to_download']}")
+        except TimeoutException:
+            assert check_exists_by_xpath(".col-12.widget-receipts-history", driver)
+
+    # является ли файл доступным и читаемым
+    def test_read_file(self, config, driver, login_lk):
+        driver.get(f"{config['link']}/{config['account']['base_code']}/account/{config['account']['ls']}/receipts")
+        try:
+            WebDriverWait(driver, 10).until(EC.visibility_of_all_elements_located((By.CSS_SELECTOR,
+                                                                                   ".col-12.widget-receipts-history")))
+            remove_folder(f"{config['path_to_download']}")
+
+            download_click = driver.find_element(By.CSS_SELECTOR, "tr:nth-child(1) .getReceipt")
+            download_click.click()
+            time.sleep(3)
+
+            assert read_file(f"{config['path_to_download']}")
+
+        except TimeoutException:
+            assert check_exists_by_xpath(".col-12.widget-receipts-history", driver)
+
 

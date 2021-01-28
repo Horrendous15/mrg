@@ -17,12 +17,13 @@ jobs:
         python-version: '3.8'
     - run: python -m pip install --upgrade pip
     - run: pip install -r requirements.txt
-    - run: pytest
-      
     - name: my artifact
       uses: actions/download-artifact@v2
       with:
         path: tests
+    - run: pytest
+      
+    
     - name: Display structure of downloaded files
       run: ls -R
       working-directory: tests

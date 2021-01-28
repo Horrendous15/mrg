@@ -42,11 +42,17 @@ def remove_folder(path):
         if f.endswith(".pdf"):
             os.remove(f)
 
+ def file_in_dir(path):
+    for f in os.listdir(path):
+        if f.endswith(".pdf"):
+            os.path.join(path, f)
+            return True
+        return False
 
 class TestReceipts():
     # скачивание квитанции (существование файла в папке загрузок)
     def test_download_file(self, config):
-        assert os.path.join(config["path_to_download"])
+        assert file_in_dir(config["path_to_download"])
 
     # является ли файл доступным и читаемым
     def test_read_file(self, config):

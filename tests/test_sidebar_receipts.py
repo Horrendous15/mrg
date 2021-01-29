@@ -40,13 +40,13 @@ def read_file(path):
 def remove_folder(path):
     list_dir = glob.glob(path)
     for f in list_dir:
-        os.remove(f"{f}.pdf")
+        os.remove(f"{f}/*.pdf")
 
 
 def file_in_dir(path):
     list_dir = glob.glob(path)
     for f in list_dir:
-        glob.glob(f"{f}.pdf")
+        glob.glob(f"{f}/*.pdf")
         return True
     return False
 

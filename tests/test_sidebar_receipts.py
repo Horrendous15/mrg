@@ -46,7 +46,7 @@ def remove_folder(path):
 def file_in_dir(path):
     list_dir = glob.glob(path)
     for f in list_dir:
-        glob.glob(f"{f}/*.pdf")
+        glob.glob(f"{f}/123.pdf")
         return True
     return False
 

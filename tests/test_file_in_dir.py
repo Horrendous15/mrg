@@ -46,22 +46,12 @@ def check_exists_by_xpath(xpath, driver):
 def read_file(path):
     try:
         os.chdir(path)
-        list_dir = glob.glob(path)
-        for f in list_dir:
+        for file in glob.glob("*.pdf"):
             fl = open(f)
             fl.close()
     except FileNotFoundError:
         return False
     return True
-    
-
-
-# удаление файлов
-def remove_folder(path):
-    os.chdir(path)
-    for file in glob.glob("*.pdf"):
-        os.remove(file)
-
 
 def file_in_dir(path):
     os.chdir(path)

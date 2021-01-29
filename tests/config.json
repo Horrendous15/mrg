@@ -13,5 +13,5 @@
   "login_reg": "4@com",
   "password_reg": "123456QWer",
   "invalid_pass": "12345678",
-  "path_to_download": "tests"
+  "path_to_download": "/tests"
 }

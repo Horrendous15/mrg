@@ -2,7 +2,7 @@ import pytest
 import time
 from datetime import datetime
 import json
-import os.path
+# import os.path
 import glob, os
 import allure
 from selenium import webdriver

@@ -156,7 +156,7 @@ class TestMenuReceipts():
         try:
             WebDriverWait(driver, 5).until(EC.visibility_of_all_elements_located((By.CSS_SELECTOR,
                                                                                    ".col-12.widget-receipts-history")))
-            remove_folder(f"{config['path_to_download']}/*.pdf")
+            remove_folder(f"{config['path_to_download']}")
             download_click = driver.find_element(By.CSS_SELECTOR, "tr:nth-child(1) .getReceipt")
             download_click.click()
             time.sleep(3)
@@ -171,7 +171,7 @@ class TestMenuReceipts():
         try:
             WebDriverWait(driver, 10).until(EC.visibility_of_all_elements_located((By.CSS_SELECTOR,
                                                                                    ".col-12.widget-receipts-history")))
-#             remove_folder(f"{config['path_to_download']}")
+            remove_folder(f"{config['path_to_download']}")
 
             download_click = driver.find_element(By.CSS_SELECTOR, "tr:nth-child(1) .getReceipt")
             download_click.click()

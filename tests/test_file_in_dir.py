@@ -16,6 +16,42 @@ from selenium.webdriver.common.action_chains import ActionChains
 
 
 # проверка существования элемента
+# def check_exists_by_xpath(xpath, driver):
+#     try:
+#         block_sch = driver.find_element(By.CSS_SELECTOR, xpath)
+#     except NoSuchElementException:
+#         return False
+#     return True
+
+
+# # чтение файла
+# def read_file(path):
+#     try:
+#         for f in os.listdir(path):
+#             if f.endswith(".pdf"):
+#                 fl = open(f)
+#                 fl.close()
+#     except FileNotFoundError:
+#         return False
+#     return True
+
+
+# # удаление файлов
+# def remove_folder(path):
+#     for f in os.listdir(path):
+#         if f.endswith(".pdf"):
+#             os.remove(f)
+
+def file_in_dir(path):
+    list_dir = glob.glob(path)
+        for f in list_dir:
+#    for f in os.listdir(path):
+#        if f.endswith(".pdf"):
+           glob.glob("/*.pdf")
+           return True
+       return False
+
+# проверка существования элемента
 def check_exists_by_xpath(xpath, driver):
     try:
         block_sch = driver.find_element(By.CSS_SELECTOR, xpath)
@@ -27,33 +63,20 @@ def check_exists_by_xpath(xpath, driver):
 # чтение файла
 def read_file(path):
     try:
-        for f in os.listdir(path):
-            if f.endswith(".pdf"):
-                fl = open(f)
-                fl.close()
+        list_dir = glob.glob(path)
+        for f in list_dir:
+            fl = open(f)
+            fl.close()
     except FileNotFoundError:
         return False
     return True
 
 
-# удаление файлов
-def remove_folder(path):
-    for f in os.listdir(path):
-        if f.endswith(".pdf"):
-            os.remove(f)
-
-def file_in_dir(path):
-   for f in os.listdir(path):
-       if f.endswith(".pdf"):
-           os.path.join(path, f)
-           return True
-       return False
-
 class TestReceipts():
     # скачивание квитанции (существование файла в папке загрузок)
     def test_download_file(self, config):
-        assert file_in_dir(config["path_to_download"])
+        assert file_in_dir(f"{config['path_to_download']}/*.pdf")
 
     # является ли файл доступным и читаемым
     def test_read_file(self, config):
-        assert read_file(f"{config['path_to_download']}")
+        assert read_file(f"{config['path_to_download']}/*.pdf")

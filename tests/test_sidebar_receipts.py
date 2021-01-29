@@ -3,7 +3,7 @@ import time
 from datetime import datetime
 import json
 import os.path
-import glob
+import glob, os
 import allure
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -44,9 +44,9 @@ def remove_folder(path):
 
 
 def file_in_dir(path):
-    list_dir = glob.glob(path)
-    for f in list_dir:
-        glob.glob(f"{f}/123.pdf")
+    os.chdir(path)
+    for file in glob.glob("*.pdf"):
+        print(file)
         return True
     return False
 

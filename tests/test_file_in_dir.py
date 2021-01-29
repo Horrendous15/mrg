@@ -44,14 +44,12 @@ def check_exists_by_xpath(xpath, driver):
 
 # чтение файла
 def read_file(path):
-    try:
-        os.chdir(path)
-        for file in glob.glob("*.pdf"):
-            fl = open(file)
-            fl.close()
-    except FileNotFoundError:
-        return False
-    return True
+    os.chdir(path)
+    for file in glob.glob("*.pdf"):
+        fl = open(file)
+        fl.close()
+        return True
+    return False
 
 def file_in_dir(path):
     os.chdir(path)

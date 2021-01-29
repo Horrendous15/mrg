@@ -163,7 +163,7 @@ class TestMenuReceipts():
             download_click.click()
             time.sleep(2)
 
-            assert file_in_dir(f"{config['path_to_download']}")
+            assert file_in_dir(f"{config['path_to_download']}/*.pdf")
         except TimeoutException:
             assert check_exists_by_xpath(".col-12.widget-receipts-history", driver)
 
@@ -179,7 +179,7 @@ class TestMenuReceipts():
             download_click.click()
             time.sleep(3)
 
-            assert read_file(f"{config['path_to_download']}")
+            assert read_file(f"{config['path_to_download']}/*.pdf")
 
         except TimeoutException:
             assert check_exists_by_xpath(".col-12.widget-receipts-history", driver)

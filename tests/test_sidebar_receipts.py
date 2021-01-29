@@ -38,9 +38,9 @@ def read_file(path):
 
 # удаление файлов
 def remove_folder(path):
-    list_dir = glob.glob(path)
-    for f in list_dir:
-        os.remove(f"{f}/*.pdf")
+     os.chdir(path)
+    for file in glob.glob("*.pdf"):
+        os.remove(file)
 
 
 def file_in_dir(path):

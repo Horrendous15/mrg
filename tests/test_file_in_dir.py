@@ -50,9 +50,9 @@ def read_file(path):
         for f in list_dir:
             fl = open(f)
             fl.close()
-            return True
     except FileNotFoundError:
         return False
+    return True
     
 
 

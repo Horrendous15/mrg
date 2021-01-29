@@ -45,10 +45,10 @@ def remove_folder(path):
 
 def file_in_dir(path):
     list_dir = glob.glob(path)
-        for f in list_dir:
-            glob.glob("*.pdf")
-            return True
-        return False
+    for f in list_dir:
+        glob.glob(f"{f}.pdf")
+        return True
+    return False
 
 
 # квитанции

@@ -27,10 +27,10 @@ def check_exists_by_xpath(xpath, driver):
 # чтение файла
 def read_file(path):
     try:
-        for f in os.listdir(path):
-            if f.endswith(".pdf"):
-                fl = open(f)
-                fl.close()
+        list_dir = glob.glob(path)
+        for f in list_dir:
+            fl = open(f)
+            fl.close()
     except FileNotFoundError:
         return False
     return True
@@ -38,15 +38,15 @@ def read_file(path):
 
 # удаление файлов
 def remove_folder(path):
-    for f in os.listdir(path):
-        if f.endswith(".pdf"):
-            os.remove(f)
+    list_dir = glob.glob(path)
+    for f in list_dir:
+        os.remove(f)
 
 
 def file_in_dir(path):
-    for f in os.listdir(path):
-        if f.endswith(".pdf"):
-            os.path.join(path, f)
+    list_dir = glob.glob(path)
+        for f in list_dir:
+            glob.glob("*.pdf")
             return True
         return False
 

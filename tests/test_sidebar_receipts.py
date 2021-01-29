@@ -40,7 +40,7 @@ def read_file(path):
 def remove_folder(path):
     list_dir = glob.glob(path)
     for f in list_dir:
-        os.remove(f)
+        os.remove(f"{f}.pdf")
 
 
 def file_in_dir(path):

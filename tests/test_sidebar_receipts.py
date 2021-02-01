@@ -38,13 +38,13 @@ def read_file(path):
 
 # удаление файлов
 def remove_folder(path):
-#     os.chdir(path)
+    os.chdir(path)
     for file in glob.glob("*.pdf"):
         os.remove(file)
 
 
 def file_in_dir(path):
-#     os.chdir(path)
+    os.chdir(path)
     for file in glob.glob("*.pdf"):
         print(file)
         return True

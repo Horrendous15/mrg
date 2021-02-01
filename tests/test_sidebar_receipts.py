@@ -156,7 +156,7 @@ class TestMenuReceipts():
         
         try:
             dir = os.path.abspath(os.curdir)
-            remove_folder(f"{dir}/tests")
+            remove_folder(f"{dir}")
             WebDriverWait(driver, 5).until(EC.visibility_of_all_elements_located((By.CSS_SELECTOR,
                                                                                    ".col-12.widget-receipts-history")))
 

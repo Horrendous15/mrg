@@ -20,19 +20,19 @@ jobs:
     
     - run: pytest
     
-    - name: my artifact
-      uses: actions/download-artifact@v2
-      with:
-        path: tests
+#     - name: my artifact
+#       uses: actions/download-artifact@v2
+#       with:
+#         path: tests
     - run: ls -R
       working-directory: tests
-      # Use always() to always run this step to publish test results when there are test failures
-      if: ${{ always() }}
+#       # Use always() to always run this step to publish test results when there are test failures
+#       if: ${{ always() }}
       
-    - run: pytest tests/test_file_in_dir.py
-    - run: ls -R
-      working-directory: tests
-      # Use always() to always run this step to publish test results when there are test failures
-      if: ${{ always() }}
+#     - run: pytest tests/test_file_in_dir.py
+#     - run: ls -R
+#       working-directory: tests
+#       # Use always() to always run this step to publish test results when there are test failures
+#       if: ${{ always() }}
 
         

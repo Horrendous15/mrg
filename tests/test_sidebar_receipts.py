@@ -38,13 +38,13 @@ def read_file(path):
 
 # удаление файлов
 def remove_folder(path):
-    os.chdir(path)
+#     os.chdir(path)
     for file in glob.glob("*.pdf"):
         os.remove(file)
 
 
 def file_in_dir(path):
-    os.chdir(path)
+#     os.chdir(path)
     for file in glob.glob("*.pdf"):
         print(file)
         return True
@@ -164,7 +164,7 @@ class TestMenuReceipts():
             download_click.click()
             time.sleep(3)
 
-            assert file_in_dir(f"{config['path_to_download']}")
+            assert file_in_dir(f"{dir}/tests")
         except TimeoutException:
             assert check_exists_by_xpath(".col-12.widget-receipts-history", driver)
 

@@ -25,7 +25,6 @@ from selenium.webdriver.common.action_chains import ActionChains
 #     return False
 
 def file_in_dir(path):
-#     dir = os.path.abspath(os.curdir)
     os.chdir(path)
     for file in glob.glob("*.pdf"):
         print(file)
@@ -36,7 +35,8 @@ def file_in_dir(path):
 class TestReceipts():
     # скачивание квитанции (существование файла в папке загрузок)
     def test_download_file(self, config):
-        assert file_in_dir(f"config['path_to_download']")
+#         dir = os.path.abspath(os.curdir)
+        assert file_in_dir(f"{config['path_to_download']}")
 
 #     # является ли файл доступным и читаемым
 #     def test_read_file(self, config):

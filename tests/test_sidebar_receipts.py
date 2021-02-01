@@ -151,20 +151,19 @@ class TestMenuReceipts():
 
     # скачивание квитанции (существование файла в папке загрузок)
     def test_download_file(self, config, driver, login_lk):
-        dir = os.path.abspath(os.curdir)
-        remove_folder(f"{dir}")
                       
         driver.get(f"{config['link']}/{config['account']['base_code']}/account/{config['account']['ls']}/receipts")
         
         try:
             WebDriverWait(driver, 5).until(EC.visibility_of_all_elements_located((By.CSS_SELECTOR,
                                                                                    ".col-12.widget-receipts-history")))
-           
+            dir = os.path.abspath(os.curdir)
+            remove_folder(f"{dir}")
             download_click = driver.find_element(By.CSS_SELECTOR, "tr:nth-child(1) .getReceipt")
             download_click.click()
             time.sleep(3)
 
-#             assert file_in_dir(f"{config['path_to_download']}")
+            assert file_in_dir(f"{dir}")
         except TimeoutException:
             assert check_exists_by_xpath(".col-12.widget-receipts-history", driver)
 

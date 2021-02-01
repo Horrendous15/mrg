@@ -158,12 +158,12 @@ class TestMenuReceipts():
             WebDriverWait(driver, 5).until(EC.visibility_of_all_elements_located((By.CSS_SELECTOR,
                                                                                    ".col-12.widget-receipts-history")))
             dir = os.path.abspath(os.curdir)
-            remove_folder(f"{dir}")
+            remove_folder(f"{dir}/tests")
             download_click = driver.find_element(By.CSS_SELECTOR, "tr:nth-child(1) .getReceipt")
             download_click.click()
             time.sleep(3)
 
-            assert file_in_dir(f"{dir}")
+            assert file_in_dir(f"{dir}/tests")
         except TimeoutException:
             assert check_exists_by_xpath(".col-12.widget-receipts-history", driver)
 

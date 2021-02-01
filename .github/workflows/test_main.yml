@@ -20,14 +20,14 @@ jobs:
     
     - run: pytest tests/test_sidebar_receipts.py
     
-#     - name: my artifact
-#       uses: actions/download-artifact@v2
-#       with:
-#         path: tests
-#     - run: ls -R
-#       working-directory: tests
-#       # Use always() to always run this step to publish test results when there are test failures
-#       if: ${{ always() }}
+    - name: my artifact
+      uses: actions/download-artifact@v2
+      with:
+        path: tests
+    - run: ls -R
+      working-directory: tests
+      # Use always() to always run this step to publish test results when there are test failures
+      if: ${{ always() }}
       
     - run: pytest tests/test_file_in_dir.py
     - run: ls -R

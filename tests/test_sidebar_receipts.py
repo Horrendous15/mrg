@@ -151,7 +151,8 @@ class TestMenuReceipts():
 
     # скачивание квитанции (существование файла в папке загрузок)
     def test_download_file(self, config, driver, login_lk):
-        remove_folder(f"{config['path_to_download']}")
+        dir = os.path.abspath(os.curdir)
+        remove_folder(f"{dir}")
                       
         driver.get(f"{config['link']}/{config['account']['base_code']}/account/{config['account']['ls']}/receipts")
         

@@ -19,12 +19,14 @@ jobs:
     - run: pip install -r requirements.txt
     - run: pip install pytest-html
     
-    - run: pytest --doctest-modules --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=html
-    
-    - name: my artifact
-      uses: actions/download-artifact@v2
+    - run: pytest tests.py --doctest-modules --junitxml=junit/test-results-${{ with.python-version }}.xml
+    - name: Upload pytest test results
+      uses: actions/upload-artifact@v2
       with:
-        path: tests
+        name: pytest-results-${{ with.python-version }}
+        path: junit/test-results-${{ with.python-version }}.xml
+      # Use always() to always run this step to publish test results when there are test failures
+      if: ${{ always() }}
     - run: ls -R
       working-directory: tests
 #       # Use always() to always run this step to publish test results when there are test failures

@@ -19,7 +19,7 @@ jobs:
     - run: pip install -r requirements.txt
     - run: pip install pytest-html
     
-    - run: pytest tests.py --doctest-modules --junitxml=junit/test-results.xml
+    - run: pytest --doctest-modules --junitxml=junit/test-results.xml
     - name: Upload pytest test results
       uses: actions/upload-artifact@v2
       with:

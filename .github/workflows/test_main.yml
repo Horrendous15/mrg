@@ -4,8 +4,8 @@ name: Test_mrg
 on:
   push:
     branches: main
-  schedule:
-    - cron: "0 5 * * *"
+ # schedule:
+#    - cron: "0 5 * * *"
 
 jobs:
   test_2:
